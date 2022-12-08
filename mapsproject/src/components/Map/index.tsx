@@ -9,6 +9,7 @@ import {
   Marker,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
+import DriverContent from "../DriverContent";
 
 const center = {
   lat: -23.551032,
@@ -71,11 +72,12 @@ const Map = () => {
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     };
+
+    //limpar input para novas pesquisas
     setPointB(location);
     setOrigin(null);
     setDestination(null);
     setStorage(null);
-    map?.panTo(location);
     map?.panTo(location);
   };
 
@@ -120,43 +122,47 @@ const Map = () => {
         googleMapsApiKey="AIzaSyDqdDpwqMa3_psd_DvvOdkNdVuXAe8tzVQ"
         libraries={["places"]}
       >
-        <GoogleMap
-          onLoad={onMapLoad}
-          center={center}
-          zoom={15}
-          mapContainerStyle={{ width: "100%", height: "100%" }}
-        >
-          <Styled.RequestContainer>
-            <StandaloneSearchBox
-              onLoad={onLoad} //Pegamos as referencias atravez do onload e setamos no nosso input
-              onPlacesChanged={onPlacesChanged} //
-            >
-              <Styled.Input placeholder="Localização do meu automovel" />
-            </StandaloneSearchBox>
+        <Styled.AppContainer>
+          <GoogleMap
+            onLoad={onMapLoad}
+            center={center}
+            zoom={15}
+            mapContainerStyle={{ width: 414, height: 896, borderRadius: 7 }}
+          >
+            <Styled.RequestContainer>
+              <StandaloneSearchBox
+                onLoad={onLoad} //Pegamos as referencias atravez do onload e setamos no nosso input
+                onPlacesChanged={onPlacesChanged} //
+              >
+                <Styled.Input placeholder="Localização do meu automovel" />
+              </StandaloneSearchBox>
 
-            <StandaloneSearchBox
-              onLoad={onLoadB} //
-              onPlacesChanged={onPlacesChangedB} //
-            >
-              <Styled.Input placeholder="Procure um parceiro Soon" />
-            </StandaloneSearchBox>
-            <Styled.Rota onClick={traceRoute}>Requisitar Guincho</Styled.Rota>
-          </Styled.RequestContainer>
+              <StandaloneSearchBox
+                onLoad={onLoadB} //
+                onPlacesChanged={onPlacesChangedB} //
+              >
+                <Styled.Input placeholder="Procure um parceiro Soon" />
+              </StandaloneSearchBox>
+              <Styled.Rota onClick={traceRoute}>Requisitar Guincho</Styled.Rota>
 
-          {!storage && pointA && <Marker position={pointA} />}
-          {!storage && pointB && <Marker position={pointB} />}
+              <DriverContent />
+            </Styled.RequestContainer>
 
-          {origin && destination && (
-            <DirectionsService
-              options={directOptions}
-              callback={directionsCallback}
-            />
-          )}
+            {!storage && pointA && <Marker position={pointA} />}
+            {!storage && pointB && <Marker position={pointB} />}
 
-          {storage && directionRender && (
-            <DirectionsRenderer options={directionRender} />
-          )}
-        </GoogleMap>
+            {origin && destination && (
+              <DirectionsService
+                options={directOptions}
+                callback={directionsCallback}
+              />
+            )}
+
+            {storage && directionRender && (
+              <DirectionsRenderer options={directionRender} />
+            )}
+          </GoogleMap>
+        </Styled.AppContainer>
       </LoadScript>
     </Styled.Container>
   );

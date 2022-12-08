@@ -2,12 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100vh;
-  width: 100vw;
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+export const AppContainer = styled.div`border`;
 
 export const RequestContainer = styled.div`
   box-sizing: border-box;
-  width: 240px;
+  width: 350px;
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -17,15 +22,14 @@ export const RequestContainer = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   font-size: 14px;
   position: absolute;
-  left: 50%;
-  margin-left: -120px;
-  margin-top: 12px;
+  left: 10%;
+  margin-top: 3rem;
+  align-items: center;
 `;
 
 export const Input = styled.input`
   box-sizing: border-box;
   border: 1px solid transparent;
-  width: 100%;
   height: 32px;
   margin-bottom: 8px;
   padding: 0 12px;
@@ -36,4 +40,10 @@ export const Input = styled.input`
   text-overflow: ellipsis;
 `;
 
-export const Rota = styled.button``;
+export const Rota = styled.button`
+  text-align: center;
+  border-radius: 5px;
+  width: 200px;
+  color: #fff;
+  background-color: #1c1c1c;
+`;
