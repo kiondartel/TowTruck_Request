@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import * as Styled from "./styles";
 
 import {
+  DirectionsRenderer,
+  DirectionsService,
   GoogleMap,
   LoadScript,
+  Marker,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
 
@@ -14,11 +17,28 @@ const center = {
 
 const Map = () => {
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>();
+  const [searchBoxB, setSearchBoxB] = useState<google.maps.places.SearchBox>();
+
+  const [pointA, setPointA] = useState<google.maps.LatLngLiteral>();
+  const [pointB, setPointB] = useState<google.maps.LatLngLiteral>();
+
+  const [origin, setOrigin] = useState<google.maps.LatLngLiteral | null>(null);
+  const [destination, setDestination] =
+    useState<google.maps.LatLngLiteral | null>();
+
   const [map, setMap] = useState<google.maps.Map>();
+
+  // armazenmanto de direções
+  const [storage, setStorage] =
+    useState<google.maps.DistanceMatrixResponse | null>(null);
 
   //Referencias de mapas
   const onLoad = (ref: google.maps.places.SearchBox) => {
     setSearchBox(ref);
+  };
+
+  const onLoadB = (ref: google.maps.places.SearchBox) => {
+    setSearchBoxB(ref);
   };
 
   //carrega as referencia de mapa
@@ -26,17 +46,73 @@ const Map = () => {
     setMap(map);
   };
 
+  // Func que pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
   const onPlacesChanged = () => {
-    // pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
     const places = searchBox!.getPlaces();
+    console.log(places);
     const place = places![0];
     const location = {
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     };
 
+    setPointA(location);
+    setOrigin(null);
+    setDestination(null);
+    setStorage(null);
     map?.panTo(location);
   };
+
+  const onPlacesChangedB = () => {
+    const places = searchBoxB!.getPlaces();
+    console.log(places);
+    const place = places![0];
+    const location = {
+      lat: place?.geometry?.location?.lat() || 0,
+      lng: place?.geometry?.location?.lng() || 0,
+    };
+    setPointB(location);
+    setOrigin(null);
+    setDestination(null);
+    setStorage(null);
+    map?.panTo(location);
+    map?.panTo(location);
+  };
+
+  //Função para traçar a rota
+  const traceRoute = () => {
+    if (pointA && pointB) {
+      setOrigin(pointA);
+      setDestination(pointB);
+    }
+  };
+
+  //Função de direction (useMemo para renderizar apenas quando o destino se alterar)
+  //@ts-ignore
+  const directOptions = React.useMemo<google.maps.DirectionsRequest>(() => {
+    return {
+      origin,
+      destination,
+      travelMode: "DRIVING",
+    };
+  }, [origin, destination]);
+
+  //@ts-ignore
+  //Receber resp da api de directions
+  const directionsCallback = useCallback((res) => {
+    if (res !== null && res.status === "OK") {
+      setStorage(res);
+    } else {
+      console.log("deu ruiim", res);
+    }
+  }, []);
+
+  //renderização de rota
+  const directionRender = useMemo<any>(() => {
+    return {
+      directions: storage,
+    };
+  }, [storage]);
 
   return (
     <Styled.Container>
@@ -50,12 +126,36 @@ const Map = () => {
           zoom={15}
           mapContainerStyle={{ width: "100%", height: "100%" }}
         >
-          <StandaloneSearchBox
-            onLoad={onLoad} //pegamos as referencias atravez do onload e setamos no nosso input
-            onPlacesChanged={onPlacesChanged} //
-          >
-            <Styled.Input placeholder="Procure um parceiro Soon" />
-          </StandaloneSearchBox>
+          <Styled.RequestContainer>
+            <StandaloneSearchBox
+              onLoad={onLoad} //Pegamos as referencias atravez do onload e setamos no nosso input
+              onPlacesChanged={onPlacesChanged} //
+            >
+              <Styled.Input placeholder="Localização do meu automovel" />
+            </StandaloneSearchBox>
+
+            <StandaloneSearchBox
+              onLoad={onLoadB} //
+              onPlacesChanged={onPlacesChangedB} //
+            >
+              <Styled.Input placeholder="Procure um parceiro Soon" />
+            </StandaloneSearchBox>
+            <Styled.Rota onClick={traceRoute}>Requisitar Guincho</Styled.Rota>
+          </Styled.RequestContainer>
+
+          {!storage && pointA && <Marker position={pointA} />}
+          {!storage && pointB && <Marker position={pointB} />}
+
+          {origin && destination && (
+            <DirectionsService
+              options={directOptions}
+              callback={directionsCallback}
+            />
+          )}
+
+          {storage && directionRender && (
+            <DirectionsRenderer options={directionRender} />
+          )}
         </GoogleMap>
       </LoadScript>
     </Styled.Container>
