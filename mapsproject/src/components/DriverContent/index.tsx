@@ -12,7 +12,7 @@ const DriverContent: React.FC = () => {
       <Styled.InfoContainer>
         <Styled.H3>R$13,90</Styled.H3>
         <hr />
-        <Styled.H3>5mins</Styled.H3>
+        <Styled.H3>Aprox. 5mins</Styled.H3>
       </Styled.InfoContainer>
       <Styled.CancelContainer>
         <Styled.P>Cancelar Reboque convencional</Styled.P>

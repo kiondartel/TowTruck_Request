@@ -127,23 +127,28 @@ const Map = () => {
             onLoad={onMapLoad}
             center={center}
             zoom={15}
-            mapContainerStyle={{ width: 414, height: 896, borderRadius: 7 }}
+            mapContainerStyle={{
+              width: 395,
+              height: 800,
+              borderRadius: 7,
+              marginLeft: 324,
+            }}
           >
             <Styled.RequestContainer>
               <StandaloneSearchBox
                 onLoad={onLoad} //Pegamos as referencias atravez do onload e setamos no nosso input
                 onPlacesChanged={onPlacesChanged} //
               >
-                <Styled.Input placeholder="Localização do meu automovel" />
+                <Styled.Input placeholder="Minha Localização" />
               </StandaloneSearchBox>
 
               <StandaloneSearchBox
                 onLoad={onLoadB} //
                 onPlacesChanged={onPlacesChangedB} //
               >
-                <Styled.Input placeholder="Procure um parceiro Soon" />
+                <Styled.Input placeholder="Chamar cooperativa" />
               </StandaloneSearchBox>
-              <Styled.Rota onClick={traceRoute}>Requisitar Guincho</Styled.Rota>
+              <Styled.Rota onClick={traceRoute}>Solicitar ReboqueX</Styled.Rota>
 
               <DriverContent />
             </Styled.RequestContainer>

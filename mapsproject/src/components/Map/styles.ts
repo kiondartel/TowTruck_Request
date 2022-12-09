@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import phone from "../../image/bacgroundd.png";
 
 export const Container = styled.div`
   height: 100vh;
@@ -8,7 +9,16 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const AppContainer = styled.div`border`;
+export const AppContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${phone});
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 950px;
+`;
 
 export const RequestContainer = styled.div`
   box-sizing: border-box;
