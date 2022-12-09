@@ -32,7 +32,7 @@ export const RequestContainer = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   font-size: 14px;
   position: absolute;
-  left: 10%;
+  left: 7%;
   margin-top: 3rem;
   align-items: center;
 `;

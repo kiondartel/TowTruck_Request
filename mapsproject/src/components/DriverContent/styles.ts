@@ -12,7 +12,6 @@ export const DriverCointainer = styled.div`
   font-size: 14px;
   position: absolute;
   margin-top: 73rem;
-  margin-right: 2rem;
 `;
 
 export const InfoContainer = styled.div`

@@ -127,6 +127,12 @@ const Map = () => {
             onLoad={onMapLoad}
             center={center}
             zoom={15}
+            options={{
+              zoomControl: false,
+              fullscreenControl: false,
+              mapTypeControl: false,
+              keyboardShortcuts: false,
+            }}
             mapContainerStyle={{
               width: 395,
               height: 800,
