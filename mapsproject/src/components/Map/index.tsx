@@ -132,6 +132,7 @@ const Map = () => {
               fullscreenControl: false,
               mapTypeControl: false,
               keyboardShortcuts: false,
+              streetViewControl: false,
             }}
             mapContainerStyle={{
               width: 395,

@@ -45,7 +45,7 @@ export const H3 = styled.h3`
 `;
 
 export const CancelContainer = styled.button`
-  background-color: #72e89a;
+  background-color: #bdc2bf;
   height: 55px;
   width: 100%;
   display: flex;
