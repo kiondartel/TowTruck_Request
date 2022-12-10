@@ -23,7 +23,7 @@ export const AppContainer = styled.div`
 export const RequestContainer = styled.div`
   box-sizing: border-box;
   width: 350px;
-  padding: 12px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,13 +37,33 @@ export const RequestContainer = styled.div`
   align-items: center;
 `;
 
+export const Bullet = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 7px;
+  background: #28e23b;
+  position: absolute;
+  right: 20rem;
+  top: 22px;
+`;
+
+export const BulletB = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 7px;
+  background: #e30a0a;
+  right: 20rem;
+  bottom: 50px;
+  position: absolute;
+`;
+
 export const Input = styled.input`
   box-sizing: border-box;
   border: 1px solid transparent;
-  height: 32px;
-  margin-bottom: 8px;
+  width: 270px;
+  height: 45px;
+  margin-bottom: 12px;
   padding: 0 12px;
-  border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   font-size: 14px;
   outline: none;
@@ -52,8 +72,7 @@ export const Input = styled.input`
 
 export const Rota = styled.button`
   text-align: center;
-  border-radius: 5px;
-  width: 200px;
+  width: 100%;
   color: #fff;
   background-color: #1c1c1c;
 `;

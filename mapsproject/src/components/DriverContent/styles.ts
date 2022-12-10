@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DriverCointainer = styled.div`
+export const DriverContainer = styled.div`
   box-sizing: border-box;
   width: 350px;
   padding-top: 10px;
@@ -12,6 +12,7 @@ export const DriverCointainer = styled.div`
   font-size: 14px;
   position: absolute;
   margin-top: 73rem;
+  display: none;
 `;
 
 export const InfoContainer = styled.div`
