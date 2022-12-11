@@ -75,4 +75,5 @@ export const Rota = styled.button`
   width: 100%;
   color: #fff;
   background-color: #1c1c1c;
+  cursor: pointer;
 `;

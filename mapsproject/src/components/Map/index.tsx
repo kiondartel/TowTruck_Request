@@ -9,13 +9,10 @@ import {
   Marker,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
+import DriverContent from "../DriverContent";
+import { center } from "../../interfaces/center";
 
-const center = {
-  lat: -23.551032,
-  lng: -46.68843,
-};
-
-const Map = () => {
+const Map: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map>();
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>();
   const [searchBoxB, setSearchBoxB] = useState<google.maps.places.SearchBox>();
@@ -45,7 +42,7 @@ const Map = () => {
     setMap(map);
   };
 
-  // Func que pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
+  //  pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
   const onPlacesChanged = () => {
     const places = searchBox!.getPlaces();
     console.log(places);
@@ -156,6 +153,8 @@ const Map = () => {
                 <Styled.Input placeholder="Chamar cooperativa" />
               </StandaloneSearchBox>
               <Styled.Rota onClick={traceRoute}>Solicitar ReboqueX</Styled.Rota>
+
+              {destination && <DriverContent />}
             </Styled.RequestContainer>
 
             {!storage && pointA && <Marker position={pointA} />}
@@ -181,6 +180,8 @@ const Map = () => {
             {storage && directionRender && (
               <DirectionsRenderer options={directionRender} />
             )}
+
+            {storage && directionRender && <DriverContent />}
           </GoogleMap>
         </Styled.AppContainer>
       </LoadScript>

@@ -12,7 +12,7 @@ export const DriverContainer = styled.div`
   font-size: 14px;
   position: absolute;
   margin-top: 73rem;
-  display: none;
+  margin-bottom: 2rem;
 `;
 
 export const InfoContainer = styled.div`
@@ -40,7 +40,7 @@ export const P = styled.p`
 `;
 
 export const H3 = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-left: 30px;
   margin-right: 30px;
 `;
