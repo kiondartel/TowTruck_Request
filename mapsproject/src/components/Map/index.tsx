@@ -9,8 +9,8 @@ import {
   Marker,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
-import DriverContent from "../DriverContent";
 import { center } from "../../interfaces/center";
+import DriverContent from "../DriverContent";
 
 const Map: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map>();
@@ -25,31 +25,31 @@ const Map: React.FC = () => {
     useState<google.maps.LatLngLiteral | null>(null);
 
   // armazenmanto de direções
-  const [storage, setStorage] =
+  const [response, setSResponse] =
     useState<google.maps.DistanceMatrixResponse | null>(null);
 
   const handleCancel = (): void => {
     setOrigin(null);
     setDestination(null);
-    setStorage(null);
+    setSResponse(null);
   };
 
   //Referencias de mapas
-  const onLoad = (ref: google.maps.places.SearchBox) => {
+  const onLoad = (ref: google.maps.places.SearchBox): void => {
     setSearchBox(ref);
   };
 
-  const onLoadB = (ref: google.maps.places.SearchBox) => {
+  const onLoadB = (ref: google.maps.places.SearchBox): void => {
     setSearchBoxB(ref);
   };
 
   //carrega as referencia de mapa
-  const onMapLoad = (map: google.maps.Map) => {
+  const onMapLoad = (map: google.maps.Map): void => {
     setMap(map);
   };
 
   //  pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
-  const onPlacesChanged = () => {
+  const onPlacesChanged = (): void => {
     const places = searchBox!.getPlaces();
     console.log(places);
     const place = places![0];
@@ -61,11 +61,11 @@ const Map: React.FC = () => {
     setPointA(location);
     setOrigin(null);
     setDestination(null);
-    setStorage(null);
+    setSResponse(null);
     map?.panTo(location);
   };
 
-  const onPlacesChangedB = () => {
+  const onPlacesChangedB = (): void => {
     const places = searchBoxB!.getPlaces();
     console.log(places);
     const place = places![0];
@@ -77,12 +77,12 @@ const Map: React.FC = () => {
     setPointB(location);
     setOrigin(null);
     setDestination(null);
-    setStorage(null);
+    setSResponse(null);
     map?.panTo(location);
   };
 
   //Função para traçar a rota
-  const traceRoute = () => {
+  const traceRoute = (): void => {
     if (pointA && pointB) {
       setOrigin(pointA);
       setDestination(pointB);
@@ -103,7 +103,7 @@ const Map: React.FC = () => {
   //Receber resp da api de directions
   const directionsCallback = useCallback((res) => {
     if (res !== null && res.status === "OK") {
-      setStorage(res);
+      setSResponse(res);
     } else {
       console.log("deu ruiim", res);
     }
@@ -112,9 +112,9 @@ const Map: React.FC = () => {
   //renderização de rota
   const directionRender = useMemo<any>(() => {
     return {
-      directions: storage,
+      directions: response,
     };
-  }, [storage]);
+  }, [response]);
 
   return (
     <Styled.Container>
@@ -170,8 +170,8 @@ const Map: React.FC = () => {
               )}
             </Styled.RequestContainer>
 
-            {!storage && pointA && <Marker position={pointA} />}
-            {!storage && pointB && (
+            {!response && pointA && <Marker position={pointA} />}
+            {!response && pointB && (
               <Marker
                 position={pointB}
                 icon={{
@@ -190,11 +190,9 @@ const Map: React.FC = () => {
               />
             )}
 
-            {storage && directionRender && (
+            {response && directionRender && (
               <DirectionsRenderer options={directionRender} />
             )}
-
-            {storage && directionRender && <DriverContent />}
           </GoogleMap>
         </Styled.AppContainer>
       </LoadScript>
