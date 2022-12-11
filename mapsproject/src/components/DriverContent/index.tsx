@@ -30,9 +30,6 @@ const DriverContent = () => {
         <hr />
         <Styled.H3>7mins(3.2km)</Styled.H3>
       </Styled.InfoContainer>
-      <Styled.CancelContainer>
-        <Styled.P>Cancelar ReboqueX</Styled.P>
-      </Styled.CancelContainer>
     </Styled.DriverContainer>
   );
 };

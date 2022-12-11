@@ -28,6 +28,12 @@ const Map: React.FC = () => {
   const [storage, setStorage] =
     useState<google.maps.DistanceMatrixResponse | null>(null);
 
+  const handleCancel = (): void => {
+    setOrigin(null);
+    setDestination(null);
+    setStorage(null);
+  };
+
   //Referencias de mapas
   const onLoad = (ref: google.maps.places.SearchBox) => {
     setSearchBox(ref);
@@ -154,7 +160,14 @@ const Map: React.FC = () => {
               </StandaloneSearchBox>
               <Styled.Rota onClick={traceRoute}>Solicitar ReboqueX</Styled.Rota>
 
-              {destination && <DriverContent />}
+              {destination && (
+                <>
+                  <DriverContent />
+                  <Styled.Cancel onClick={handleCancel}>
+                    Cancelar ReboqueX
+                  </Styled.Cancel>
+                </>
+              )}
             </Styled.RequestContainer>
 
             {!storage && pointA && <Marker position={pointA} />}

@@ -77,3 +77,17 @@ export const Rota = styled.button`
   background-color: #1c1c1c;
   cursor: pointer;
 `;
+
+export const Cancel = styled.button`
+  position: absolute;
+  background-color: #bdc2bf;
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #fff;
+  bottom: -37rem;
+  font-size: 1rem;
+`;

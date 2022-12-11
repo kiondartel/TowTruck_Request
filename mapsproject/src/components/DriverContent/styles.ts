@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const DriverContainer = styled.div`
   box-sizing: border-box;
   width: 350px;
+  height: 180px;
   padding-top: 10px;
   flex-direction: column;
   justify-content: center;
@@ -43,15 +44,4 @@ export const H3 = styled.h3`
   font-size: 1.3rem;
   margin-left: 30px;
   margin-right: 30px;
-`;
-
-export const CancelContainer = styled.button`
-  background-color: #bdc2bf;
-  height: 55px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  border: 1px solid #fff;
 `;
