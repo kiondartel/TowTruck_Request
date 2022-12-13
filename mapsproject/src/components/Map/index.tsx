@@ -118,7 +118,10 @@ const Map: React.FC = () => {
 
   return (
     <Styled.Container>
-      <LoadScript googleMapsApiKey="ApiKey" libraries={["places"]}>
+      <LoadScript
+        googleMapsApiKey="AIzaSyDqdDpwqMa3_psd_DvvOdkNdVuXAe8tzVQ"
+        libraries={["places"]}
+      >
         <Styled.AppContainer>
           <GoogleMap
             onLoad={onMapLoad}
