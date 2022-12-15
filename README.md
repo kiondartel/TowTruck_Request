@@ -13,7 +13,7 @@ This is my app \o/
 ## Getting started
   
 * To run the project.
-- Yarn rum dev
+- Yarn  dev
 
 ## How to use
 
