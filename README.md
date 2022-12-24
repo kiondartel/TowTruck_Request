@@ -9,6 +9,7 @@ This is my app \o/
 
 ## Services Used
 * Github
+* GoogleMapsApi
 
 ## Getting started
   
