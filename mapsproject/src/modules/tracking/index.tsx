@@ -8,11 +8,11 @@ import {
   LoadScript,
   Marker,
 } from "@react-google-maps/api";
-import { center } from "../../modules/tracking/utils/center";
-import DriverContent from "../DriverContent";
-import SearchBox from "../../modules/tracking/components/SearchBox";
-import CustomMarker from "../../modules/tracking/components/CustomMarker";
-import { iconSettings } from "../../modules/tracking/utils/iconSettings ";
+import { center } from "./utils/center";
+import DriverContent from "../../components/DriverContent";
+import SearchBox from "./components/SearchBox";
+import CustomMarker from "./components/CustomMarker";
+import { iconSettings } from "./utils/iconSettings ";
 
 const Map: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map>();
@@ -50,16 +50,14 @@ const Map: React.FC = () => {
     setMap(map);
   };
 
-  //  pegamos lat e lng pra criar novo objeto de localização, apontando para o novo local e centralizando
   const onPlacesChanged = (): void => {
     const places = searchBox!.getPlaces();
-    console.log(places);
+
     const place = places![0];
     const location = {
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     };
-    //limpar input para novas pesquisas
     setPointA(location);
     setOrigin(null);
     setDestination(null);
@@ -69,7 +67,7 @@ const Map: React.FC = () => {
 
   const onPlacesChangedB = (): void => {
     const places = searchBoxB!.getPlaces();
-    console.log(places);
+
     const place = places![0];
     const location = {
       lat: place?.geometry?.location?.lat() || 0,
@@ -83,7 +81,6 @@ const Map: React.FC = () => {
     map?.panTo(location);
   };
 
-  //Função para traçar a rota
   const traceRoute = (): void => {
     if (pointA && pointB) {
       setOrigin(pointA);
