@@ -1,6 +1,5 @@
-import React from "react";
 import * as Styled from "./styles";
-import photo from "../../image/driver.jpg";
+import photo from "../../assets/image/driver.jpg";
 
 import {
   BsFillChatTextFill,
