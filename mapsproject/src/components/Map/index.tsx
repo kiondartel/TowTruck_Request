@@ -7,10 +7,12 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
-  StandaloneSearchBox,
 } from "@react-google-maps/api";
-import { center } from "../../interfaces/center";
+import { center } from "../../modules/tracking/utils/center";
 import DriverContent from "../DriverContent";
+import SearchBox from "../../modules/tracking/components/SearchBox";
+import CustomMarker from "../../modules/tracking/components/CustomMarker";
+import { iconSettings } from "../../modules/tracking/utils/iconSettings ";
 
 const Map: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map>();
@@ -145,19 +147,17 @@ const Map: React.FC = () => {
               <Styled.Bullet />
 
               <Styled.BulletB />
-              <StandaloneSearchBox
-                onLoad={onLoad} //Pegamos as referencias atravez do onload e setamos no nosso input
-                onPlacesChanged={onPlacesChanged} //
-              >
-                <Styled.Input placeholder="Minha Localização" />
-              </StandaloneSearchBox>
+              <SearchBox
+                onLoad={onLoad}
+                onPlacesChanged={onPlacesChanged}
+                placeholder="Minha Localização"
+              />
+              <SearchBox
+                onLoad={onLoadB}
+                onPlacesChanged={onPlacesChangedB}
+                placeholder="Chamar cooperativa"
+              />
 
-              <StandaloneSearchBox
-                onLoad={onLoadB} //
-                onPlacesChanged={onPlacesChangedB} //
-              >
-                <Styled.Input placeholder="Chamar cooperativa" />
-              </StandaloneSearchBox>
               <Styled.Rota onClick={traceRoute}>Solicitar ReboqueX</Styled.Rota>
 
               {destination && (
