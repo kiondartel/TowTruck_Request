@@ -16,17 +16,16 @@ import { iconSettings } from "./utils/iconSettings ";
 
 const Map: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map>();
+  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+  console.log(googleMapsApiKey); //
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>();
   const [searchBoxB, setSearchBoxB] = useState<google.maps.places.SearchBox>();
-
   const [pointA, setPointA] = useState<google.maps.LatLngLiteral>();
   const [pointB, setPointB] = useState<google.maps.LatLngLiteral>();
-
   const [origin, setOrigin] = useState<google.maps.LatLngLiteral | null>(null);
   const [destination, setDestination] =
     useState<google.maps.LatLngLiteral | null>(null);
-
-  // armazenmanto de direções
   const [response, setSResponse] =
     useState<google.maps.DistanceMatrixResponse | null>(null);
 
@@ -36,7 +35,6 @@ const Map: React.FC = () => {
     setSResponse(null);
   };
 
-  //Referencias de mapas
   const onLoad = (ref: google.maps.places.SearchBox): void => {
     setSearchBox(ref);
   };
@@ -117,10 +115,7 @@ const Map: React.FC = () => {
 
   return (
     <Styled.Container>
-      <LoadScript
-        googleMapsApiKey="AIzaSyDqdDpwqMa3_psd_DvvOdkNdVuXAe8tzVQ"
-        libraries={["places"]}
-      >
+      <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
         <Styled.AppContainer>
           <GoogleMap
             onLoad={onMapLoad}
